@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER Diego Fernández
+MAINTAINER redBorder
 
 # Add epel
 RUN yum install -y epel-release
@@ -12,6 +12,7 @@ RUN echo '10.0.70.31 rbrepo.redborder.lan' | tee --append /etc/hosts; \
     make                \
     tar                 \
     which               \
+    ruby                \
     wget                \
     lcov                \
     cmake               \
@@ -19,3 +20,6 @@ RUN echo '10.0.70.31 rbrepo.redborder.lan' | tee --append /etc/hosts; \
     slang-devel         \
     libcmocka-devel;    \
   yum clean all
+
+# Set workdir
+WORKDIR /app
