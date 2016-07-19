@@ -5,8 +5,7 @@ MAINTAINER redBorder
 RUN yum install -y epel-release
 
 # Install common redborder dependencies
-RUN echo '10.0.70.31 rbrepo.redborder.lan' | tee --append /etc/hosts; \
-  rpm -ivh http://rbrepo.redborder.lan/redBorder/rbrepo-1.0.0-1.el7.rb.noarch.rpm; \
+RUN rpm -ivh http://repo.redborder.com/redborder-repo-1.0.0-1.el7.rb.noarch.rpm; \
   yum install -y \
     gcc                 \
     make                \
