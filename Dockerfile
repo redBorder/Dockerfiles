@@ -29,7 +29,11 @@ RUN echo '10.0.70.31 rbrepo.redborder.lan' | tee --append /etc/hosts; \
      librd-devel        \
      rbutils-devel      \
      librdkafka-devel   \
-    git;		\
+     yajl               \
+     yajl-devel         \
+     python-setuptools	\
+     gcc-c++		\
+     git;		\
   yum clean all
 
 
