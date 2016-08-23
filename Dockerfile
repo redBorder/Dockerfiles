@@ -33,6 +33,7 @@ RUN echo '10.0.70.31 rbrepo.redborder.lan' | tee --append /etc/hosts; \
      yajl-devel         \
      python-setuptools	\
      gcc-c++		\
+     qt-devel		\
      git;		\
   yum clean all
 
@@ -50,6 +51,17 @@ RUN python setup.py install
 
 ### ./configure --with-default-snmp-version=3 --with-rdkafka --with-sys-contact="@redborder.net" --with-sys-location="Unknown" --with-logfile=/var/log/snmpd.log --with-persistent-directory=/var/net-snmp --disable-agent --disable-manuals --disable-scripts --disable-mibs
 
+WORKDIR /callgrind
+RUN git clone https://github.com/anarey/callgrind_tools .
+RUN git clone https://github.com/icefox/rpp.git rpp
+
+WORKDIR /callgrind/rpp
+RUN qmake-qt4 -recursive
+RUN make
+#RUN make
+
+WORKDIR /callgrind
+RUN qmake-qt4 && make
 
 # Set workdir
 WORKDIR /app
