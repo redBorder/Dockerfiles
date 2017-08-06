@@ -36,10 +36,10 @@ RUN yum install -y      \
 WORKDIR /app
 
 ################################################################################
-# flow2kafka specific
+# f2k specific
 ################################################################################
 
-# Install nprobe dependencies
+# Install f2k dependencies
 RUN yum install -y \
     GeoIP-devel         \
     udns-devel          \
@@ -57,6 +57,16 @@ RUN yum install -y \
     devtoolset-4-gcc        \
     devtoolset-4-valgrind;  \
   yum clean all
+
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly -y
+
+ENV PATH=/root/.cargo/bin:$PATH
+
+RUN git clone https://github.com/Bigomby/dsensorsdb.git; \
+  cd dsensorsdb; \
+  make release; \
+  PREFIX=/usr make install; \
+  ln -s /usr/lib/libdsensorsdb.so /usr/lib64/
 
 # Install RPMs
 ADD rpms/ /rpms/
